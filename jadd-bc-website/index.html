@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jadd BC | 日本放送宣教・メディア宣教</title>
+  <meta name="description" content="Jadd BCは、YouTubeやInstagram、LINEを通じて賛美、全国の礼拝説教、聖書朗読をお届けするキリスト教放送宣教ミニストリーです。">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #38b6ff;
+      --primary-dark: #1e90ff;
+      --primary-soft: #eef8ff;
+      --text: #2d3748;
+      --text-muted: #718096;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --line-green: #06c755;
+      --youtube-red: #ff0000;
+      --instagram-pink: #e1306c;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+      --card-hover: 0 20px 30px -10px rgba(56, 182, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* --- ヘッダー --- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(56, 182, 255, 0.3);
+    }
+
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a202c;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .btn-header {
+      background: var(--primary);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-header:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* --- ヒーローセクション --- */
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-soft) 100%);
+      padding: 4.5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: rgba(56, 182, 255, 0.15);
+      color: #0077b6;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+      color: #1a202c;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(56, 182, 255, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      color: var(--text);
+      padding: 0.85rem 1.8rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    /* --- 共通セクションスタイル --- */
+    section {
+      padding: 4.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title-wrap h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title-wrap p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* --- 3つの活動カード --- */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .pillar-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s;
+      border: 1px solid rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover);
+    }
+
+    .card-banner {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-worship {
+      background: linear-gradient(135deg, #fff9db 0%, #ffe3e3 100%);
+    }
+
+    .banner-message {
+      background: linear-gradient(135deg, #e3fafc 0%, #dbe4ff 100%);
+    }
+
+    .banner-bible {
+      background: #1e3a8a;
+    }
+
+    .banner-bible img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-banner i {
+      font-size: 4rem;
+      opacity: 0.85;
+    }
+
+    .card-content {
+      padding: 1.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-content h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: #1a202c;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-btn {
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* --- SNS & QRセクション --- */
+    .sns-section {
+      background: var(--white);
+      border-radius: 2rem;
+      padding: 3.5rem 2rem;
+      box-shadow: var(--card-shadow);
+      margin: 2rem auto 4rem;
+      max-width: 1050px;
+    }
+
+    .sns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .sns-card {
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sns-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .sns-icon.yt { color: var(--youtube-red); }
+    .sns-icon.line { color: var(--line-green); }
+    .sns-icon.ig { color: var(--instagram-pink); }
+
+    .sns-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .sns-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .qr-box {
+      width: 170px;
+      height: 170px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .btn-sns {
+      display: inline-block;
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+
+    .btn-sns:hover {
+      opacity: 0.9;
+    }
+
+    .btn-yt { background: var(--youtube-red); }
+    .btn-line { background: var(--line-green); }
+    .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+    /* --- 地域教会連携セクション --- */
+    .church-connect {
+      background: linear-gradient(135deg, #eef8ff 0%, #ffffff 100%);
+      border-radius: 2rem;
+      padding: 3.5rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .church-text h3 {
+      font-size: 1.8rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .church-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .church-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .church-features li {
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .church-features i {
+      color: var(--primary);
+    }
+
+    .church-map-card {
+      background: #fff;
+      border-radius: 1.2rem;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #e2e8f0;
+    }
+
+    .church-map-card i {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* --- 祈りのリクエスト & コンタクト --- */
+    .contact-box {
+      background: #1e293b;
+      color: #fff;
+      border-radius: 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .contact-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* --- フッター --- */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 4rem 1.5rem 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #334155;
+    }
+
+    .footer-brand h4 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .footer-col h5 {
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      padding-top: 2rem;
+      color: #64748b;
+    }
+
+    /* --- レスポンシブ対応 (スマホ表示) --- */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      .church-connect {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーションバー -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo-area">
+        <img src="images/logo.png" alt="Jadd BC ロゴ" class="logo-img">
+        <div class="logo-text">
+          <h1>Jadd BC</h1>
+          <span>日本放送宣教 / メディア宣教</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">私たちについて</a></li>
+        <li><a href="#pillars">3つの活動</a></li>
+        <li><a href="#sns">SNS・配信</a></li>
+        <li><a href="#church">地域教会</a></li>
+        <li><a href="#contact" class="btn-header">お祈り・お問い合わせ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tagline">
+        <i class="fa-solid fa-cross"></i> メディアを通じて届ける、イエス・キリストの福音
+      </div>
+      <h2>日常のなかで出会う、<br>希望とやすらぎのみことば。</h2>
+      <p>
+        Jadd BCは、YouTubeやInstagram・LINEを通じて<br>
+        賛美、全国の礼拝説教、聖書朗読をお届けするキリスト教放送宣教ミニストリーです。
+      </p>
+      <div class="hero-actions">
+        <a href="#pillars" class="btn-primary">活動を見る</a>
+        <a href="#sns" class="btn-secondary">公式SNSをフォロー</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3つの活動セクション -->
+  <section id="pillars">
+    <div class="section-title-wrap">
+      <h3>私たちの活動（3つの柱）</h3>
+      <p>いつでも、どこでも、スマートフォンから神様の恵みに触れられる場所を提供します</p>
+    </div>
+
+    <div class="pillars-grid">
+      <!-- 賛美 -->
+      <div class="pillar-card">
+        <div class="card-banner banner-worship">
+          <i class="fa-solid fa-music" style="color: #f59f00;"></i>
+        </div>
+        <div class="card-content">
+          <span class="card-tag">Praise & Worship</span>
+          <h4>賛美 (ゴスペル)</h4>
+          <p>
+            心に寄り添うゴスペルや現代的な賛美歌を配信。音楽を通じて主への感謝と喜びを全国へ届けます。
+          </p>
+          <a href="#sns" class="card-btn">賛美動画を聴く <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- メッセージ -->
+      <div class="pillar-card">
+        <div class="card-banner banner-message">
+          <i class="fa-solid fa-book-bible" style="color: #3b82f6;"></i>
+        </div>
+        <div class="card-content">
+          <span class="card-tag">Sermons</span>
+          <h4>礼拝メッセージ</h4>
+          <p>
+            全国各地の提携教会から届けられる分かりやすい聖書の解き明かし。日々の歩みの糧となるみことばを配信。
+          </p>
+          <a href="#church" class="card-btn">説教・協力教会を見る <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 聖書朗読 -->
+      <div class="pillar-card">
+        <div class="card-banner banner-bible">
+          <img src="images/jadd-bible.jpg" alt="Jadd Bible">
+        </div>
+        <div class="card-content">
+          <span class="card-tag">Bible Reading</span>
+          <h4>聖書朗読 (Jadd Bible)</h4>
+          <p>
+            日々のディボーションに。優しく落ち着いた語りかけで聖書を耳から味わう朗読プログラムです。
+          </p>
+          <a href="#sns" class="card-btn">朗読を聴く <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS & 公式リンク (QRコード配置) -->
+  <section id="sns">
+    <div class="sns-section">
+      <div class="section-title-wrap" style="margin-bottom: 1.5rem;">
+        <h3>公式チャンネル＆SNS</h3>
+        <p>スマートフォンからQRコードを読み取るか、ボタンをクリックしてご登録ください</p>
+      </div>
+
+      <div class="sns-grid">
+        <!-- YouTube 公式 -->
+        <div class="sns-card">
+          <i class="fa-brands fa-youtube sns-icon yt"></i>
+          <h4>YouTube 公式</h4>
+          <p>賛美・説教・特別配信を公開中</p>
+          <div class="qr-box">
+            <img src="images/youtube-qr.jpg" alt="Jadd BC YouTube QRコード">
+          </div>
+          <a href="https://youtube.com" target="_blank" class="btn-sns btn-yt">チャンネル登録</a>
+        </div>
+
+        <!-- 賛美チャンネル (Jadd Worship) -->
+        <div class="sns-card">
+          <i class="fa-brands fa-youtube sns-icon yt"></i>
+          <h4>Jadd Worship</h4>
+          <p>賛美・ゴスペル専門チャンネル</p>
+          <div class="qr-box">
+            <img src="images/worship-qr.jpg" alt="Jadd Worship QRコード">
+          </div>
+          <a href="https://youtube.com" target="_blank" class="btn-sns btn-yt">賛美を聴く</a>
+        </div>
+
+        <!-- 公式 LINE -->
+        <div class="sns-card">
+          <i class="fa-brands fa-line sns-icon line"></i>
+          <h4>公式 LINE</h4>
+          <p>毎日の聖書通読や最新案内が届く</p>
+          <div class="qr-box">
+            <img src="images/line-qr.png" alt="LINE公式アカウント QRコード">
+          </div>
+          <a href="https://line.me" target="_blank" class="btn-sns btn-line">友だち追加</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 地域教会とつながる -->
+  <section id="church">
+    <div class="church-connect">
+      <div class="church-text">
+        <span class="card-tag">Local Churches</span>
+        <h3>オンラインの配信から、<br>地域のリアルな教会へ。</h3>
+        <p>
+          Jadd BCは、放送宣教だけでなく、一人ひとりが近くの教会で温かい交わりを持てるよう橋渡しをしています。全国の福音的な教会と連携し、説教の配信や教会紹介を行っています。
+        </p>
+        <ul class="church-features">
+          <li><i class="fa-solid fa-check"></i> 聖書信仰に立つ全国の提携教会ネットワーク</li>
+          <li><i class="fa-solid fa-check"></i> 初めて教会に行く方への丁寧なご案内</li>
+          <li><i class="fa-solid fa-check"></i> 配信協力・説教提供教会の募集</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="border-color: var(--primary); color: var(--primary-dark);">教会をお探しの方はこちら</a>
+      </div>
+
+      <div class="church-map-card">
+        <i class="fa-solid fa-church"></i>
+        <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">全国の協力教会</h4>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          日本全国の礼拝メッセージを随時更新中。<br>お近くの教会をお探しいただけます。
+        </p>
+        <div style="font-size: 0.85rem; background: #f8fafc; padding: 1rem; border-radius: 8px; color: #64748b;">
+          ※現在、各地域の説教アーカイブを順次整備中です。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 祈りのリクエスト & お問い合わせ -->
+  <section id="contact">
+    <div class="contact-box">
+      <h3>お祈りのリクエスト・お問い合わせ</h3>
+      <p>
+        日々の悩み、祈ってほしい課題、教会探しのご相談など、どのようなことでもお気軽にお寄せください。スタッフが心を込めてお祈りいたします。
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="#sns" class="btn-primary" style="background: var(--line-green);">LINEから気軽に相談</a>
+        <a href="mailto:info@example.com" class="btn-secondary" style="background: transparent; color: #fff; border-color: #64748b;">メールで送る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h4>Jadd BC</h4>
+        <p>
+          日本人の福音宣教のために、YouTube・Instagram・LINEを通じてキリストの愛と希望を届ける放送伝道ミニストリーです。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>コンテンツ</h5>
+        <ul>
+          <li><a href="#pillars">賛美 (Praise)</a></li>
+          <li><a href="#pillars">礼拝メッセージ</a></li>
+          <li><a href="#pillars">聖書朗読 (Jadd Bible)</a></li>
+          <li><a href="#church">地域教会ネットワーク</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>つながる</h5>
+        <ul>
+          <li><a href="#sns">公式 YouTube</a></li>
+          <li><a href="#sns">公式 LINE</a></li>
+          <li><a href="#sns">公式 Instagram</a></li>
+          <li><a href="#contact">祈りのリクエスト</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; Jadd BC (Japan Broadcasting Crusade / Ministry) All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
